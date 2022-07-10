@@ -1,0 +1,89 @@
+server:
+  port: 6262
+
+spring:
+  # datasoure
+  datasource:
+    url: jdbc:mysql://124.222.48.192:3306/slnova?ServerTimezone-UTC&characterEncoding=UTF-8
+    username: root
+    password: 971707
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # rabbitmq
+  rabbitmq:
+    host: 124.222.48.192
+    port: 5672
+    username: rabbit
+    password: password
+    virtual-host: vhost
+    # ------- 消息确认配置项 --------
+    # 确认消息已发送到交换机
+    #publisher-confirms: true
+    # 确认消息已发送队列
+    #publisher-returns: true
+
+  # 给html加的
+  thymeleaf:
+    # 关闭页面缓存
+    cache: false
+    # 模板编码
+    encoding: utf-8
+    # 页面映射路径
+    prefix: classpath:/templates/
+    # thymeleaf视图后的后缀
+    suffix: .html
+    # thymeleaf模板模式
+    mode: HTML
+
+  web:
+    resources:
+      static-locations: [ classpath:/templates/,classpath:/static/ ]
+
+  # 给html加的
+  mvc:
+    view:
+      suffix: .html
+
+
+#  # 给jsp才加的
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
+
+
+
+
+
+
+
+# 使用注解开发，不用配置mybatis了
+## 注解开发就不需要写mybatis的配置信息
+## mybatis
+#mybatis:
+#  mapper-locations: classpath:mapper/*Mapper.xml # mapper映射文件路径
+#  type-aliases-package: com.jcwang.springbootmybatis.domain.HostState
+#  #  config-location: # 指定mybatis的核心配置文件
+
+
+# 后台打印sql语句
+logging:
+  level:
+    com:
+      example:
+        mybatis:
+          mapper: debug
+
+
+
+
+
+
+
+
+
+
+
+
+
+

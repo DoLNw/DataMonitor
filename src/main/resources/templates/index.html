@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/index.css">
+    <title>主机监控系统</title>
+    <script src="js/jquery-2.2.1.min.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/guangxi.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+<div class="t_container">
+    <header class="t_header">
+        <span>主机监控系统</span>
+        <button id="start_btn" type="button"></button>
+    </header>
+    <main class="t_main" id="t_main">
+        <!--/*-->
+        <div class="t_center_box">
+            <div class="t_top_box">
+                <img class="t_l_line" src="img/left_line.png" alt="">
+                <ul class="t_nav">
+                    <li th:each="hostState: ${hostStates}">
+<!--                        <h1 th:text="${hostState.getName()}"></h1>-->
+                        <h1>[[${hostState.getName()}]]</h1>
+                    </li>
+                </ul>
+                <img class="t_r_line" src="img/right_line.png" alt="">
+            </div>
+        </div>
+        <!--*/-->
+        <div class="t_center_box" id="device_num_info">
+            <div class="t_top_box">
+                <img class="t_l_line" src="img/left_line.png" alt="">
+                <ul class="t_nav">
+                    <li>
+                        <span>总设备数</span>
+                        <h1 id="all_num">[[${size}]]</h1>
+                        <i></i>
+                    </li>
+                    <li>
+                        <img class="online_status" src="img/online.png" alt="">
+                        <span>在线设备数目</span>
+                        <h1 id="online_num"> </h1>
+                    </li>
+                    <li>
+                        <span>正在训练设备数目</span>
+                        <h1 id="training_num"></h1>
+                    </li>
+                </ul>
+                <img class="t_r_line" src="img/right_line.png" alt="">
+            </div>
+        </div>
+
+
+
+    </main>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $("#start_btn").click(function() {
+        if (document.getElementById("online_num").innerText === "0") {
+            alert("无在线设备");
+        } else if (document.getElementById("training_num").innerText !== "0") {
+            alert("正在训练");
+        } else {
+            $.ajax({
+                url: 'sendFanoutsafsavarrefhuaerifheairuhfoera',
+                type: 'get',
+                // dataType: 'json',
+                // data:JSON.stringify('jsonObject'),
+                success:function(result){
+                    alert(result);
+                },
+                error:function(e){
+                    // alert(e);
+                    alert("failed");
+                    console.log(e);
+                }
+            });
+        }
+    })
+</script>
+
+<script type="text/javascript">
+    function async_data() {
+        async_data_chart_4();
+    }
+    // async_data() ;
+    setInterval("async_data()", "1000");
+</script>
+
